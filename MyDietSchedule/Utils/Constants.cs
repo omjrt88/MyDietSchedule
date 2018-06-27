@@ -7,17 +7,22 @@ namespace MyDietSchedule.Utils
     {
         public static bool IsDev = true;
 
-        public static Color BackgroundColor = Color.Black; //Color.FromRgb(80, 80, 00);
-        public static Color MainTextColor = Color.White;
+        #region --- GUI Values Design ---
+        // Colors
+        public static Color BackgroundColor = Color.FromHex("2f4259");
+        public static Color SecondaryBackgroundColor = Color.White;
+        public static Color BorderColor = Color.Cyan;
+        public static Color MainTextColor = Color.FromHex("3ec3d5");
+        public static Color TextboxTextColor = Color.Black;
 
+        // Sizes
         public static int LoginIconHeight = 100;
+        #endregion
 
-        //----------Login------------------------
-
+        #region --- Login ---
         public static string LoginUrl = "http://www.test.com/api/Auth/Login";
-
         public static string NoInternetText = "No Internet Connection, please reconnect.";
-
         public static string SettingsScreenTitle = "Settings";
+        #endregion
     }
 }

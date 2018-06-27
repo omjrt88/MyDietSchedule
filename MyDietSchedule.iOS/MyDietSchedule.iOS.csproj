@@ -96,6 +96,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\SQLite_IOS.cs" />
     <Compile Include="Data\NetworkConnection.cs" />
+    <Compile Include="Custom Form Elements\ImageCircleRenderer.cs" />
+    <Compile Include="Custom Form Elements\ImageEntryRenderer.cs" />
+    <Compile Include="Effects\iOSBackgroundEntryEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -172,5 +175,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Custom Form Elements\" />
+    <Folder Include="Assets.xcassets\email.png.imageset\" />
+    <Folder Include="Assets.xcassets\password.png.imageset\" />
+    <Folder Include="Assets.xcassets\user.png.imageset\" />
+    <Folder Include="Effects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\email.png" />
+    <BundleResource Include="Resources\password.png" />
+    <BundleResource Include="Resources\user.png" />
   </ItemGroup>
 </Project>

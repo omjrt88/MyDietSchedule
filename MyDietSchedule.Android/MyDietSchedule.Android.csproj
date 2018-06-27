@@ -67,6 +67,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\SQLite_Android.cs" />
     <Compile Include="Data\NetworkConnection.cs" />
+    <Compile Include="Custom Form Elements\ImageCircleRenderer.cs" />
+    <Compile Include="Custom Form Elements\ImageEntryRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -94,6 +96,10 @@
       <IncludeInPackage>true</IncludeInPackage>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\LoginIcon.png" />
+    <AndroidResource Include="Resources\drawable\email.png" />
+    <AndroidResource Include="Resources\drawable\password.png" />
+    <AndroidResource Include="Resources\drawable\user.png" />
+    <AndroidResource Include="Resources\drawable\border.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -102,6 +108,7 @@
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
     <Folder Include="Data\" />
+    <Folder Include="Custom Form Elements\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyDietSchedule\MyDietSchedule.csproj">

@@ -15,17 +15,22 @@ namespace MyDietSchedule.Views
             Init();
         }
 
+        #region Initializers
         void Init()
         {
+            DesignInit();
             InitCircleImage();
-            BackgroundColor = Constants.BackgroundColor;
-            lbl_Username.TextColor = Constants.MainTextColor;
-            lbl_Password.TextColor = Constants.MainTextColor;
             ActivitySpinner.IsVisible = false;
-            //LoginIcon.HeightRequest = Constants.LoginIconHeight;
 
             Entry_Username.Completed += (sender, e) => Entry_Password.Focus();
             Entry_Password.Completed += SignInProcedure;
+        }
+
+        private void DesignInit()
+        {
+            BackgroundColor = Constants.BackgroundColor;
+            ActivitySpinner.Color = Constants.MainTextColor;
+            Btn_Signin.TextColor = Constants.SecondaryBackgroundColor;
         }
 
         private void InitCircleImage()
@@ -33,8 +38,9 @@ namespace MyDietSchedule.Views
             ImageCircle img = new ImageCircle
             {
                 CircleName = "Example",
-                BorderColor = Color.White,
-                BorderThickness = 4,
+                BorderColor = Constants.BorderColor,
+                BorderThickness = 2,
+                FillColor = Constants.SecondaryBackgroundColor,
                 HeightRequest = Constants.LoginIconHeight,
                 WidthRequest = Constants.LoginIconHeight,
                 Aspect = Aspect.AspectFit,
@@ -46,6 +52,9 @@ namespace MyDietSchedule.Views
             ImgCircleStack.Children.Add(img);
         }
 
+        #endregion
+
+        #region Event Methods
         async void SignInProcedure(object sender, EventArgs e)
         {
             ActivitySpinner.IsVisible = true;
@@ -65,5 +74,7 @@ namespace MyDietSchedule.Views
                 ActivitySpinner.IsVisible = false;
             }
         }
+
+        #endregion
     }
 }

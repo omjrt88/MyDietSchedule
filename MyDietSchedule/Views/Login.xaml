@@ -2,38 +2,58 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Controls="clr-namespace:MyDietSchedule.Controls"
+             xmlns:Custom="clr-namespace:MyDietSchedule.CustomFormElements"
              x:Class="MyDietSchedule.Views.Login">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="primary">#3ec3d5</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
         <StackLayout x:Name="MasterLayout">
             <StackLayout.Padding>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="Android, WinPhone">0</On>
-                    <On Platform="iOS">0,30,0,0</On>
+                    <On Platform="iOS">0,20,0,0</On>
                 </OnPlatform>
-            </StackLayout.Padding>            
+            </StackLayout.Padding>      
             <Controls:NoInternetDisplay/>
             
             <StackLayout x:Name="LogoStack" VerticalOptions="FillAndExpand">
-                <!--<Image x:Name="LoginIcon" Source="LoginIcon.png" BackgroundColor="White"/>-->
                 <StackLayout x:Name="ImgCircleStack"></StackLayout>
             </StackLayout>
             
-            <StackLayout x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
-                <StackLayout.Padding>
+            <StackLayout Padding="20" Spacing="10" x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
+<!--                <StackLayout.Padding>
                     <OnIdiom x:TypeArguments="Thickness">
                         <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
                         <OnIdiom.Tablet>140,0,140,0</OnIdiom.Tablet>
                     </OnIdiom>
-                </StackLayout.Padding>
+                </StackLayout.Padding>-->
 
-                <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="true"/>
-                
-                <Label x:Name="lbl_Username" Text="Username"/>
-                <Entry x:Name="Entry_Username" Placeholder="Username"/>
-                <Label x:Name="lbl_Password" Text="Password"/>
-                <Entry x:Name="Entry_Password" Placeholder="Password"/>
-                <Button x:Name="Btn_Signin" Text="Sign in" Clicked="SignInProcedure" StyleClass="Default"/>
+                <ActivityIndicator x:Name="ActivitySpinner" IsRunning="true"/>
+
+                <Custom:ImageEntry 
+                    x:Name="Entry_Username"
+                    TextColor="White" 
+                    PlaceholderColor="{StaticResource primary}" 
+                    Image="user" 
+                    Placeholder="Email"
+                    HorizontalOptions="FillAndExpand"/>
+                <Custom:ImageEntry
+                    x:Name="Entry_Password"
+                    TextColor="White" 
+                    PlaceholderColor="{StaticResource primary}"  
+                    Image="password" 
+                    Placeholder="Password"
+                    IsPassword="true"
+                    HorizontalOptions="FillAndExpand"/>
+                <Button 
+                    x:Name="Btn_Signin" 
+                    Text="Sign in" 
+                    Clicked="SignInProcedure" 
+                    BackgroundColor="{StaticResource primary}"/>
             </StackLayout>
         </StackLayout>
         </ScrollView>
