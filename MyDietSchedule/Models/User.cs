@@ -5,7 +5,7 @@ namespace MyDietSchedule.Models
 {
 	public class User
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
         public string FirstName { get; set; }
@@ -18,9 +18,13 @@ namespace MyDietSchedule.Models
 
         public string Email { get; set; }
 
+        public string Phone { get; set; }
+
         public string Password { get; set; }
 
         public bool Logged { get; set; }
+
+        public DateTime NextDate { get; set; }
 
         /***** Constructors *****/
 
@@ -34,11 +38,11 @@ namespace MyDietSchedule.Models
             this.Logged = false;
         }
 
-        public User(string Email, string Password, string FirstName, string LastName, DateTime Birthday, string Address)
+        public User(string Email, string Password, string FirstName, string LastName, string Phone, DateTime Birthday, string Address)
         {
             this.Email = Email;
             this.Password = Password;
-
+            this.Phone = Phone;
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.Birthday = Birthday;

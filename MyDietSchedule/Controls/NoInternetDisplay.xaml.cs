@@ -19,7 +19,17 @@ namespace MyDietSchedule.Controls
         {
             Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {
-                lbl_NoInternet.Text = (!CheckIfInternet()) ? lbl_NoInternet.Text = Constants.NoInternetText : "";
+                if (!CheckIfInternet())
+                {
+                    lbl_NoInternet.BackgroundColor = Color.Red;
+                    lbl_NoInternet.Text = Constants.NoInternetText;
+                }
+                else
+                {
+                    lbl_NoInternet.BackgroundColor = Color.Transparent;
+                    lbl_NoInternet.Text = "";
+                }
+
                 return true;
             });
         }

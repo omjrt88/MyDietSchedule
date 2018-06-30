@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MyDietSchedule.CustomFormElements;
 using MyDietSchedule.Models;
 using MyDietSchedule.Utils;
+using MyDietSchedule.Views.Users;
 using Xamarin.Forms;
 
 namespace MyDietSchedule.Views
@@ -28,9 +29,7 @@ namespace MyDietSchedule.Views
 
         private void DesignInit()
         {
-            BackgroundColor = Constants.BackgroundColor;
-            ActivitySpinner.Color = Constants.MainTextColor;
-            Btn_Signin.TextColor = Constants.SecondaryBackgroundColor;
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private void InitCircleImage()
@@ -38,9 +37,6 @@ namespace MyDietSchedule.Views
             ImageCircle img = new ImageCircle
             {
                 CircleName = "Example",
-                BorderColor = Constants.BorderColor,
-                BorderThickness = 2,
-                FillColor = Constants.SecondaryBackgroundColor,
                 HeightRequest = Constants.LoginIconHeight,
                 WidthRequest = Constants.LoginIconHeight,
                 Aspect = Aspect.AspectFit,
@@ -75,6 +71,12 @@ namespace MyDietSchedule.Views
             }
         }
 
+        void RegisterView(object sender, EventArgs e)
+        {
+            ActivitySpinner.IsVisible = true;
+            Navigation.PushAsync(new NewUser());
+            ActivitySpinner.IsVisible = false;
+        }
         #endregion
     }
 }

@@ -4,7 +4,7 @@ using MyDietSchedule.iOS.Effects;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ResolutionGroupName("FlyingEverywhere")]
+[assembly: ResolutionGroupName("MyDietSchedule")]
 [assembly: ExportEffect(typeof(iOSBackgroundEntryEffect), "BackgroundEffect")]
 namespace MyDietSchedule.iOS.Effects
 {

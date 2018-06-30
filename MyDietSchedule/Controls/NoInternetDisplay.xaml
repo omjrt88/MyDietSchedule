@@ -2,6 +2,13 @@
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="MyDietSchedule.Controls.NoInternetDisplay"
-             VerticalOptions="FillAndExpand">
-    <Label x:Name="lbl_NoInternet" Margin="0,0,0,-50" Text="" HorizontalTextAlignment="Center" TextColor="Black" BackgroundColor="Red" HorizontalOptions="FillAndExpand"/>
+             VerticalOptions="FillAndExpand"
+             Padding="0">
+    
+    <Label x:Name="lbl_NoInternet" 
+           Margin="0,0,0,-50"
+           Text="" 
+           HorizontalTextAlignment="Center" 
+           TextColor="Black" 
+           HorizontalOptions="FillAndExpand"/>
 </StackLayout>

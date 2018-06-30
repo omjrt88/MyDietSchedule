@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="MyDietSchedule.Views.Users.NewUser" 
+    xmlns:local="clr-namespace:MyDietSchedule.Effects"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:Custom="clr-namespace:MyDietSchedule.CustomFormElements" 
+    BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="10">
+                <Label 
+                    HeightRequest="40" 
+                    HorizontalOptions="FillAndExpand" 
+                    Text="Register User" 
+                    BackgroundColor="{StaticResource PrimaryColor}" 
+                    TextColor="{StaticResource SecondayColor}" 
+                    FontSize="20" 
+                    HorizontalTextAlignment="Center" 
+                    VerticalTextAlignment="Center" />
+                
+                <StackLayout 
+                    Orientation="Horizontal" 
+                    Padding="20,40,20,0">
+                    <Custom:ImageEntry 
+                        x:Name="Entry_FirstName" 
+                        TextColor="{StaticResource PrimaryColor}" 
+                        PlaceholderColor="{StaticResource SecondayColor}" 
+                        Placeholder="First Name" 
+                        HorizontalOptions="FillAndExpand" />
+                    
+                    <Custom:ImageEntry 
+                        x:Name="Entry_LastName" 
+                        TextColor="{StaticResource PrimaryColor}" 
+                        PlaceholderColor="{StaticResource SecondayColor}" 
+                        Placeholder="Last Name" 
+                        HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <StackLayout 
+                    Orientation="Horizontal" 
+                    Padding="20,0,20,0">
+                    <Label 
+                        Text="Birthday:" 
+                        FontSize="Medium"
+                        Margin="0,0,0,0"
+                        VerticalOptions="EndAndExpand" 
+                        HorizontalOptions="Center" 
+                        TextColor="{StaticResource PrimaryColor}" />
+                    <DatePicker 
+                        x:Name="BirthDatePicker"
+                        Margin="40,20,0,-10" 
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="50" 
+                        WidthRequest="100"
+                        BackgroundColor="{StaticResource SecondayColor}"
+                        FontSize="Medium"
+                        TextColor="{StaticResource DefaultColor}"
+                        FontAttributes="Bold"
+                        Date="{x:Static sys:DateTime.Now}">
+                        <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                        <DatePicker.MinimumDate>
+                            <sys:DateTime x:FactoryMethod="Parse">
+                                <x:Arguments>
+                                    <x:String>
+                                        Jan 1 1940
+                                    </x:String>
+                                </x:Arguments>
+                            </sys:DateTime>
+                        </DatePicker.MinimumDate>
+                        <DatePicker.MaximumDate>
+                            <sys:DateTime x:FactoryMethod="Parse">
+                                <x:Arguments>
+                                    <x:String>
+                                        Dec 31 2050
+                                    </x:String>
+                                </x:Arguments>
+                            </sys:DateTime>
+                        </DatePicker.MaximumDate>
+                    </DatePicker>
+                </StackLayout>
+                <ActivityIndicator
+                    x:Name="ActivitySpinner"
+                    Color="{StaticResource PrimaryColor}"
+                    IsRunning="true"/>
+                
+                <Label 
+                    Text="Address:"
+                    FontSize="Medium"
+                    Margin="20,20,20,0"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    TextColor="{StaticResource PrimaryColor}" />
+                
+                <Editor
+                    x:Name="Editor_Address"
+                    BackgroundColor="{StaticResource SecondayColor}"
+                    TextColor="{StaticResource DefaultColor}"
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    Margin="20,0,20,0"
+                    HeightRequest="100"/>
+                
+                <Custom:ImageEntry
+                    x:Name="Entry_Phone"
+                    Margin="20,0,20,0"
+                    HeightRequest="50"
+                    TextColor="{StaticResource PrimaryColor}"
+                    PlaceholderColor="{StaticResource SecondayColor}"
+                    Placeholder="Phone"
+                    Keyboard="Telephone"
+                    MaxLength="8"
+                    HorizontalOptions="FillAndExpand"/>
+
+                <Custom:ImageEntry
+                    x:Name="Entry_Email"
+                    Margin="20,0,20,0"
+                    HeightRequest="50"
+                    TextColor="{StaticResource PrimaryColor}"
+                    PlaceholderColor="{StaticResource SecondayColor}"
+                    Placeholder="Email"
+                    HorizontalOptions="FillAndExpand"/>
+                
+                <Custom:ImageEntry
+                    x:Name="Entry_Password"
+                    Margin="20,0,20,0"
+                    HeightRequest="50"
+                    TextColor="{StaticResource PrimaryColor}"
+                    PlaceholderColor="{StaticResource SecondayColor}"
+                    Placeholder="Password"
+                    IsPassword="true"
+                    HorizontalOptions="FillAndExpand"/>
+                
+                <Custom:ImageEntry
+                    x:Name="Entry_ConfirmPassword"
+                    Margin="20,0,20,0"
+                    HeightRequest="50"
+                    TextColor="{StaticResource PrimaryColor}"
+                    PlaceholderColor="{StaticResource SecondayColor}"
+                    Placeholder="Confirm Password"
+                    IsPassword="true"
+                    HorizontalOptions="FillAndExpand"/>
+                
+                <Button
+                    Margin="20,0,20,0"
+                    HeightRequest="50"
+                    TextColor="{StaticResource SecondayColor}"
+                    Text="Register"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    Clicked="RegisterEvent"
+                    HorizontalOptions="FillAndExpand" />
+                <Label
+                    Margin="0,0,0,20"
+                    Text="I have an account"
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="Center"
+                    TextColor="{StaticResource PrimaryColor}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="LoginViewEvent"
+                                NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

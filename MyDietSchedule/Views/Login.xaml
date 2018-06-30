@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDietSchedule.Views.Login"
              xmlns:Controls="clr-namespace:MyDietSchedule.Controls"
              xmlns:Custom="clr-namespace:MyDietSchedule.CustomFormElements"
-             x:Class="MyDietSchedule.Views.Login">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Color x:Key="primary">#3ec3d5</Color>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+             BackgroundColor="{StaticResource BackgroundColor}"
+             Padding="0">
+
     <ContentPage.Content>
-        <ScrollView>
         <StackLayout x:Name="MasterLayout">
             <StackLayout.Padding>
                 <OnPlatform x:TypeArguments="Thickness">
@@ -20,31 +17,35 @@
             </StackLayout.Padding>      
             <Controls:NoInternetDisplay/>
             
-            <StackLayout x:Name="LogoStack" VerticalOptions="FillAndExpand">
-                <StackLayout x:Name="ImgCircleStack"></StackLayout>
+            <StackLayout 
+                    x:Name="ImgCircleStack" 
+                    Margin="0,0,0,-20"
+                    VerticalOptions="FillAndExpand">
             </StackLayout>
             
-            <StackLayout Padding="20" Spacing="10" x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
-<!--                <StackLayout.Padding>
-                    <OnIdiom x:TypeArguments="Thickness">
-                        <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
-                        <OnIdiom.Tablet>140,0,140,0</OnIdiom.Tablet>
-                    </OnIdiom>
-                </StackLayout.Padding>-->
+            <StackLayout 
+                    Padding="20,0,20,0"
+                    Margin="0,0,0,-50"
+                    Spacing="10" 
+                    x:Name="LoginEntriesStack" 
+                    VerticalOptions="StartAndExpand">
 
-                <ActivityIndicator x:Name="ActivitySpinner" IsRunning="true"/>
+                <ActivityIndicator 
+                    x:Name="ActivitySpinner"
+                    Color="{StaticResource PrimaryColor}"
+                    IsRunning="true"/>
 
                 <Custom:ImageEntry 
                     x:Name="Entry_Username"
-                    TextColor="White" 
-                    PlaceholderColor="{StaticResource primary}" 
+                    TextColor="{StaticResource SecondayColor}" 
+                    PlaceholderColor="{StaticResource PrimaryColor}" 
                     Image="user" 
                     Placeholder="Email"
                     HorizontalOptions="FillAndExpand"/>
                 <Custom:ImageEntry
                     x:Name="Entry_Password"
-                    TextColor="White" 
-                    PlaceholderColor="{StaticResource primary}"  
+                    TextColor="{StaticResource SecondayColor}" 
+                    PlaceholderColor="{StaticResource PrimaryColor}"  
                     Image="password" 
                     Placeholder="Password"
                     IsPassword="true"
@@ -53,9 +54,22 @@
                     x:Name="Btn_Signin" 
                     Text="Sign in" 
                     Clicked="SignInProcedure" 
-                    BackgroundColor="{StaticResource primary}"/>
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    TextColor="{StaticResource SecondayColor}"/>
+                
             </StackLayout>
+            <Label 
+                Margin="0,0,0,20" 
+                Text="I don't have an account" 
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="Center" 
+                TextColor="{StaticResource PrimaryColor}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Tapped="RegisterView"
+                        NumberOfTapsRequired="1" />
+                </Label.GestureRecognizers>
+            </Label>
         </StackLayout>
-        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

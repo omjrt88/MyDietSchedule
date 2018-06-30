@@ -69,6 +69,7 @@
     <Compile Include="Data\NetworkConnection.cs" />
     <Compile Include="Custom Form Elements\ImageCircleRenderer.cs" />
     <Compile Include="Custom Form Elements\ImageEntryRenderer.cs" />
+    <Compile Include="Effects\DroidBackgroundEntryEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -100,6 +101,7 @@
     <AndroidResource Include="Resources\drawable\password.png" />
     <AndroidResource Include="Resources\drawable\user.png" />
     <AndroidResource Include="Resources\drawable\border.xml" />
+    <AndroidResource Include="Resources\drawable\edit.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -109,6 +111,7 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
     <Folder Include="Data\" />
     <Folder Include="Custom Form Elements\" />
+    <Folder Include="Effects\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyDietSchedule\MyDietSchedule.csproj">

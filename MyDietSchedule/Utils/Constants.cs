@@ -10,19 +10,17 @@ namespace MyDietSchedule.Utils
         #region --- GUI Values Design ---
         // Colors
         public static Color BackgroundColor = Color.FromHex("2f4259");
-        public static Color SecondaryBackgroundColor = Color.White;
-        public static Color BorderColor = Color.Cyan;
         public static Color MainTextColor = Color.FromHex("3ec3d5");
-        public static Color TextboxTextColor = Color.Black;
 
         // Sizes
-        public static int LoginIconHeight = 100;
+        public static int LoginIconHeight = 150;
         #endregion
 
         #region --- Login ---
         public static string LoginUrl = "http://www.test.com/api/Auth/Login";
         public static string NoInternetText = "No Internet Connection, please reconnect.";
         public static string SettingsScreenTitle = "Settings";
+        public static int MinPasswordLength = 6;
         #endregion
     }
 }

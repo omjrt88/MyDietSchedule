@@ -185,5 +185,6 @@
     <BundleResource Include="Resources\email.png" />
     <BundleResource Include="Resources\password.png" />
     <BundleResource Include="Resources\user.png" />
+    <BundleResource Include="Resources\edit.png" />
   </ItemGroup>
 </Project>
