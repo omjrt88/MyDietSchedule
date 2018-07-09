@@ -7,11 +7,11 @@ namespace MyDietSchedule.Utils
     {
         public static bool IsDev = true;
 
-        #region --- GUI Values Design ---
-        // Colors
-        public static Color BackgroundColor = Color.FromHex("2f4259");
-        public static Color MainTextColor = Color.FromHex("3ec3d5");
+        public const string emailRegex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+    @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
 
+
+        #region --- GUI Values Design ---
         // Sizes
         public static int LoginIconHeight = 150;
         #endregion
@@ -21,6 +21,11 @@ namespace MyDietSchedule.Utils
         public static string NoInternetText = "No Internet Connection, please reconnect.";
         public static string SettingsScreenTitle = "Settings";
         public static int MinPasswordLength = 6;
+
+        public static Color GetColor(string color)
+        {
+            return (Color)Application.Current.Resources[color];
+        }
         #endregion
     }
 }

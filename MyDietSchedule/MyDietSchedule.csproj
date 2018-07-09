@@ -20,12 +20,17 @@
     <Folder Include="Custom Form Elements\" />
     <Folder Include="Views\Users\" />
     <Folder Include="Effects\" />
+    <Folder Include="Custom Form Elements\Behaviors\" />
+    <Folder Include="Utils\Resource Dictionaries\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controls\NoInternetDisplay.cs" />
     <Compile Remove="Custom Form Elements\BackgroundEntryEffect.cs" />
+    <Compile Remove="Utils\Resource Dictionaries\FormValidations.cs" />
+    <Compile Remove="Utils\Resource Dictionaries\FormValidation.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Assets\styles.css" />
+    <EmbeddedResource Remove="Utils\Resource Dictionaries\FormValidation.xaml" />
   </ItemGroup>
 </Project>

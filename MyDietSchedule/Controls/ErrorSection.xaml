@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDietSchedule.Controls.ErrorSection"
+             IsVisible="false"
+             Margin="0,0,0,-5">
+    <Label 
+           Text="Errors:" 
+           FontSize="Small"
+           FontAttributes="Italic"
+           Margin="0,0,0,0"
+           TextColor="{StaticResource ErrorColor}"/>
+
+    <ListView 
+        SeparatorVisibility="None" 
+        BackgroundColor="{StaticResource BackgroundColor}"
+        HasUnevenRows="true" 
+        x:Name="ErrorList">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+                <Label Text="{Binding .}" VerticalTextAlignment="Center" FontSize="Small" TextColor="Red" />
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</StackLayout>

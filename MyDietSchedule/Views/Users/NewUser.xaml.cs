@@ -22,8 +22,8 @@ namespace MyDietSchedule.Views.Users
 
         private void DesignInit()
         {
-            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Constants.BackgroundColor;
-            ((NavigationPage)Application.Current.MainPage).BarTextColor = Constants.MainTextColor;
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Constants.GetColor("PrimaryColor");
+            ((NavigationPage)Application.Current.MainPage).BarTextColor = Constants.GetColor("BarTextColor");
         }
 
         #region Event Methods

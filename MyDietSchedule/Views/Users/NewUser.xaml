@@ -14,8 +14,8 @@
                     HeightRequest="40" 
                     HorizontalOptions="FillAndExpand" 
                     Text="Register User" 
-                    BackgroundColor="{StaticResource PrimaryColor}" 
-                    TextColor="{StaticResource SecondayColor}" 
+                    BackgroundColor="{StaticResource ThirdColor}" 
+                    TextColor="{StaticResource BackgroundColor}" 
                     FontSize="20" 
                     HorizontalTextAlignment="Center" 
                     VerticalTextAlignment="Center" />

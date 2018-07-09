@@ -4,10 +4,16 @@
              x:Class="MyDietSchedule.Views.Login"
              xmlns:Controls="clr-namespace:MyDietSchedule.Controls"
              xmlns:Custom="clr-namespace:MyDietSchedule.CustomFormElements"
+             xmlns:Behavior="clr-namespace:MyDietSchedule.CustomFormElements.Behaviors"
              BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:theme="clr-namespace:MyDietSchedule.Utils.ResourceDictionaries"
              Padding="0">
-
+    <ContentPage.Resources>
+        <ResourceDictionary MergedWith="theme:Form_Validations" />
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
+
         <StackLayout x:Name="MasterLayout">
             <StackLayout.Padding>
                 <OnPlatform x:TypeArguments="Thickness">
@@ -16,7 +22,6 @@
                 </OnPlatform>
             </StackLayout.Padding>      
             <Controls:NoInternetDisplay/>
-            
             <StackLayout 
                     x:Name="ImgCircleStack" 
                     Margin="0,0,0,-20"
@@ -38,14 +43,25 @@
                 <Custom:ImageEntry 
                     x:Name="Entry_Username"
                     TextColor="{StaticResource SecondayColor}" 
-                    PlaceholderColor="{StaticResource PrimaryColor}" 
+                    PlaceholderColor="{StaticResource PrimaryColor}"
+                    BackgroundColor="{StaticResource ThirdColor}"
                     Image="user" 
                     Placeholder="Email"
-                    HorizontalOptions="FillAndExpand"/>
+                    HorizontalOptions="FillAndExpand"
+                    Grid.Row="0" Grid.Column="1">
+                    <Entry.Behaviors>
+                      <Behavior:EmailValidatorBehavior x:Name="emailValidator" ColorDefault="{StaticResource SecondayColor}"/>
+                    </Entry.Behaviors>
+                </Custom:ImageEntry>
+                <Label Grid.Row="1" Grid.Column="1" Style="{Binding Source={x:Reference emailValidator}, 
+                    Path=IsValid, 
+                    Converter={StaticResource boolToStyleEmail}}" />
+                
                 <Custom:ImageEntry
                     x:Name="Entry_Password"
                     TextColor="{StaticResource SecondayColor}" 
-                    PlaceholderColor="{StaticResource PrimaryColor}"  
+                    PlaceholderColor="{StaticResource PrimaryColor}"
+                    BackgroundColor="{StaticResource ThirdColor}"
                     Image="password" 
                     Placeholder="Password"
                     IsPassword="true"
@@ -56,6 +72,8 @@
                     Clicked="SignInProcedure" 
                     BackgroundColor="{StaticResource PrimaryColor}"
                     TextColor="{StaticResource SecondayColor}"/>
+
+                <Controls:ErrorSection x:Name="ErrorSection" ErrorMsgs=""/>
                 
             </StackLayout>
             <Label 

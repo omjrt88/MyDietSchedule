@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Reflection;
 using SQLite;
 
 namespace MyDietSchedule.Models
 {
-	public class User
+    public class User
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -27,12 +28,15 @@ namespace MyDietSchedule.Models
         public DateTime NextDate { get; set; }
 
         /***** Constructors *****/
+        #region Constructors
 
-        public User() {
+        public User()
+        {
             this.Logged = false;
         }
 
-        public User(string Email, string Password) {
+        public User(string Email, string Password)
+        {
             this.Email = Email;
             this.Password = Password;
             this.Logged = false;
@@ -49,16 +53,42 @@ namespace MyDietSchedule.Models
             this.Address = Address;
             this.Logged = false;
         }
+        #endregion
 
         /***** Methods *****/
+        #region Methods
 
-        public bool LoginParameters()
+        public bool HasEmptyLoginParameters()
         {
-            if (!String.IsNullOrEmpty(this.Email) && !String.IsNullOrEmpty(this.Password))
+            if (!String.IsNullOrWhiteSpace(this.Email) && !String.IsNullOrWhiteSpace(this.Password))
             {
                 return true;
             }
             return false;
         }
+
+        #endregion
+
+        /*Validations*/
+        #region
+        public bool HasEmptyFields()
+        {
+            Type type = GetType();
+            PropertyInfo[] propertyInfo = type.GetProperties();
+            bool hasEmptyValues = false;
+            foreach (PropertyInfo pInfo in propertyInfo)
+            {
+                object value = type.GetProperty(pInfo.Name).GetValue(this);
+                if (pInfo.GetType().Name == "String")
+                {
+                    hasEmptyValues |= string.IsNullOrWhiteSpace((string)value);
+                }
+            }
+            return hasEmptyValues;
+        }
+
+
+        #endregion
+
     }
 }

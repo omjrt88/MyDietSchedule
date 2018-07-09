@@ -42,6 +42,7 @@ namespace MyDietSchedule.Views
                 Aspect = Aspect.AspectFit,
                 HorizontalOptions = LayoutOptions.Center,
                 Source = "LoginIcon.png",
+                FillColor = Constants.GetColor("ImgbackgroudColor"),
                 Margin = new Thickness(0, 40, 0, 0)
             };
 
@@ -51,22 +52,26 @@ namespace MyDietSchedule.Views
         #endregion
 
         #region Event Methods
-        async void SignInProcedure(object sender, EventArgs e)
+        void SignInProcedure(object sender, EventArgs e)
         {
             ActivitySpinner.IsVisible = true;
 
             User user = new User(Entry_Username.Text, Entry_Password.Text);
-            if (user.Logged)
-            {
-                await DisplayAlert("Login", "Si Entro esta vez", "Ok");
+            user.HasEmptyFields();
 
+            if (!string.IsNullOrWhiteSpace(Entry_Password.Text))
+            //if (user.Logged || Entry_Password.Text != "")
+            {
+                //await DisplayAlert("Login", "Si Entro esta vez", "Ok");
+                ErrorSection.ErrorMsgs = null;
                 ActivitySpinner.IsVisible = false;
                 //await Navigation.PushModalAsync(new NavigationPage(new MasterDetail()));
             }
             else
             {
-                await DisplayAlert("Login", "Error, Error, Error, Error, Error....", "Ok");
+                //await DisplayAlert("Login", "Error, Error, Error, Error, Error....", "Ok");
                 //await DisplayAlert("Login", "Login Not Correct, empty username or password", "Ok");
+                ErrorSection.ErrorMsgs = new string[]{"123", "456", "789"};
                 ActivitySpinner.IsVisible = false;
             }
         }
