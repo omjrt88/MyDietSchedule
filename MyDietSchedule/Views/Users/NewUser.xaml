@@ -5,36 +5,38 @@
     x:Class="MyDietSchedule.Views.Users.NewUser" 
     xmlns:local="clr-namespace:MyDietSchedule.Effects"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:Custom="clr-namespace:MyDietSchedule.CustomFormElements" 
-    BackgroundColor="{StaticResource BackgroundColor}">
+    xmlns:Custom="clr-namespace:MyDietSchedule.CustomFormElements"
+    xmlns:Behavior="clr-namespace:MyDietSchedule.CustomFormElements.Behaviors"
+    xmlns:Controls="clr-namespace:MyDietSchedule.Controls"
+    xmlns:theme="clr-namespace:MyDietSchedule.Utils.ResourceDictionaries"
+    Title="Register User">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary MergedWith="theme:Form_Validations" />
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Spacing="10">
-                <Label 
-                    HeightRequest="40" 
-                    HorizontalOptions="FillAndExpand" 
-                    Text="Register User" 
-                    BackgroundColor="{StaticResource ThirdColor}" 
-                    TextColor="{StaticResource BackgroundColor}" 
-                    FontSize="20" 
-                    HorizontalTextAlignment="Center" 
-                    VerticalTextAlignment="Center" />
-                
                 <StackLayout 
                     Orientation="Horizontal" 
                     Padding="20,40,20,0">
                     <Custom:ImageEntry 
                         x:Name="Entry_FirstName" 
-                        TextColor="{StaticResource PrimaryColor}" 
-                        PlaceholderColor="{StaticResource SecondayColor}" 
+                        TextColor="{StaticResource SecondayColor}" 
+                        PlaceholderColor="{StaticResource PrimaryColor}"
+                        LineColor="{StaticResource PrimaryColor}"
                         Placeholder="First Name" 
+                        Text="{Binding FirstName}"
                         HorizontalOptions="FillAndExpand" />
                     
                     <Custom:ImageEntry 
                         x:Name="Entry_LastName" 
-                        TextColor="{StaticResource PrimaryColor}" 
-                        PlaceholderColor="{StaticResource SecondayColor}" 
-                        Placeholder="Last Name" 
+                        TextColor="{StaticResource SecondayColor}" 
+                        PlaceholderColor="{StaticResource PrimaryColor}"
+                        LineColor="{StaticResource PrimaryColor}"
+                        Placeholder="Last Name"
+                        Text="{Binding LastName}"
                         HorizontalOptions="FillAndExpand" />
                 </StackLayout>
 
@@ -55,11 +57,11 @@
                         HorizontalOptions="FillAndExpand"
                         HeightRequest="50" 
                         WidthRequest="100"
-                        BackgroundColor="{StaticResource SecondayColor}"
                         FontSize="Medium"
-                        TextColor="{StaticResource DefaultColor}"
+                        TextColor="{StaticResource SecondayColor}" 
                         FontAttributes="Bold"
-                        Date="{x:Static sys:DateTime.Now}">
+                        Date="{Binding Birthday}">
+<!--                        Date="{x:Static sys:DateTime.Now}">-->
                         <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                         <DatePicker.MinimumDate>
                             <sys:DateTime x:FactoryMethod="Parse">
@@ -81,11 +83,6 @@
                         </DatePicker.MaximumDate>
                     </DatePicker>
                 </StackLayout>
-                <ActivityIndicator
-                    x:Name="ActivitySpinner"
-                    Color="{StaticResource PrimaryColor}"
-                    IsRunning="true"/>
-                
                 <Label 
                     Text="Address:"
                     FontSize="Medium"
@@ -93,64 +90,141 @@
                     VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand"
                     TextColor="{StaticResource PrimaryColor}" />
-                
-                <Editor
-                    x:Name="Editor_Address"
-                    BackgroundColor="{StaticResource SecondayColor}"
-                    TextColor="{StaticResource DefaultColor}"
-                    VerticalOptions="EndAndExpand"
-                    HorizontalOptions="FillAndExpand"
+
+                <StackLayout
                     Margin="20,0,20,0"
-                    HeightRequest="100"/>
-                
+                    Padding="0,0,0,2"
+                    BackgroundColor="{StaticResource BorderColor}">
+                    <Editor
+                        BackgroundColor="{StaticResource ThirdBackgroundColor}" 
+                        x:Name="Editor_Address"
+                        TextColor="{StaticResource SecondayColor}" 
+                        VerticalOptions="EndAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Text="{Binding Address}"
+                        HeightRequest="100"/>
+                </StackLayout>
+
                 <Custom:ImageEntry
                     x:Name="Entry_Phone"
-                    Margin="20,0,20,0"
+                    Margin="20,40,20,0"
                     HeightRequest="50"
-                    TextColor="{StaticResource PrimaryColor}"
-                    PlaceholderColor="{StaticResource SecondayColor}"
+                    TextColor="{StaticResource SecondayColor}" 
+                    PlaceholderColor="{StaticResource PrimaryColor}"
+                    LineColor="{StaticResource PrimaryColor}"
                     Placeholder="Phone"
                     Keyboard="Telephone"
                     MaxLength="8"
+                    Text="{Binding Phone}"
                     HorizontalOptions="FillAndExpand"/>
 
                 <Custom:ImageEntry
                     x:Name="Entry_Email"
-                    Margin="20,0,20,0"
+                    Margin="20,40,20,0"
                     HeightRequest="50"
-                    TextColor="{StaticResource PrimaryColor}"
-                    PlaceholderColor="{StaticResource SecondayColor}"
+                    TextColor="{StaticResource SecondayColor}" 
+                    PlaceholderColor="{StaticResource PrimaryColor}"
+                    LineColor="{StaticResource PrimaryColor}"
                     Placeholder="Email"
-                    HorizontalOptions="FillAndExpand"/>
+                    HorizontalOptions="FillAndExpand"
+                    Text="{Binding Email}"
+                    Grid.Row="0" Grid.Column="1">
+                    <Entry.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                          <x:Arguments>
+                            <KeyboardFlags>None</KeyboardFlags>
+                          </x:Arguments>
+                        </Keyboard>
+                    </Entry.Keyboard>
+                    <Entry.Behaviors>
+                        <Behavior:EmailValidatorBehavior x:Name="emailValidator" ColorDefault="{StaticResource SecondayColor}"/>
+                    </Entry.Behaviors>
+                </Custom:ImageEntry>
+                <Label 
+                    Margin="20,0,20,0"
+                    Grid.Row="1" 
+                    Grid.Column="1" 
+                    Style="{Binding Source={x:Reference emailValidator}, 
+                        Path=IsValid, 
+                        Converter={StaticResource boolToStyleEmail}}" />
                 
                 <Custom:ImageEntry
                     x:Name="Entry_Password"
                     Margin="20,0,20,0"
                     HeightRequest="50"
-                    TextColor="{StaticResource PrimaryColor}"
-                    PlaceholderColor="{StaticResource SecondayColor}"
+                    TextColor="{StaticResource SecondayColor}" 
+                    PlaceholderColor="{StaticResource PrimaryColor}"
+                    LineColor="{StaticResource PrimaryColor}"
                     Placeholder="Password"
                     IsPassword="true"
-                    HorizontalOptions="FillAndExpand"/>
+                    Text="{Binding Password}"
+                    HorizontalOptions="FillAndExpand"
+                    Grid.Row="0" Grid.Column="1">
+                    <Entry.Behaviors>
+                      <Behavior:PasswordValidatorBehavior 
+                        x:Name="passValidator" 
+                        ColorDefault="{StaticResource SecondayColor}"/>
+                    </Entry.Behaviors>
+                </Custom:ImageEntry>
+                <Label
+                    Margin="20,0,20,0"
+                    Grid.Row="1" 
+                    Grid.Column="1"
+                    Text="{Binding 
+                        Source={x:Reference passValidator},
+                        Path=ErrorMessage}}"
+                    Style="{Binding 
+                        Source={x:Reference passValidator}, 
+                        Path=IsValid, 
+                        Converter={StaticResource boolToStyleEmail}}" />
                 
                 <Custom:ImageEntry
                     x:Name="Entry_ConfirmPassword"
                     Margin="20,0,20,0"
                     HeightRequest="50"
-                    TextColor="{StaticResource PrimaryColor}"
-                    PlaceholderColor="{StaticResource SecondayColor}"
+                    TextColor="{StaticResource SecondayColor}" 
+                    PlaceholderColor="{StaticResource PrimaryColor}"
+                    LineColor="{StaticResource PrimaryColor}"
                     Placeholder="Confirm Password"
                     IsPassword="true"
-                    HorizontalOptions="FillAndExpand"/>
+                    HorizontalOptions="FillAndExpand"
+                    Grid.Row="0" Grid.Column="1">
+                    <Entry.Behaviors>
+                        <Behavior:PasswordValidatorBehavior 
+                        x:Name="confirmPassValidator" 
+                        ColorDefault="{StaticResource SecondayColor}"
+                        PasswordConfirm="{Binding 
+                            Source={x:Reference passValidator},
+                            Path=EntryValue}}"
+                        />
+                    </Entry.Behaviors>
+                </Custom:ImageEntry>
+                <Label
+                    Margin="20,0,20,0"
+                    Grid.Row="1" 
+                    Grid.Column="1"
+                    Text="{Binding Source={x:Reference confirmPassValidator},
+                        Path=ErrorMessage}}"
+                    Style="{Binding Source={x:Reference confirmPassValidator}, 
+                        Path=IsValid, 
+                        Converter={StaticResource boolToStyleEmail}}" />
+                
+                <ActivityIndicator
+                    x:Name="ActivitySpinner"
+                    Color="{StaticResource PrimaryColor}"
+                    IsRunning="true"/>
                 
                 <Button
+                    x:Name="Btn_Register"
                     Margin="20,0,20,0"
                     HeightRequest="50"
-                    TextColor="{StaticResource SecondayColor}"
+                    TextColor="{StaticResource ThirdColor}"
                     Text="Register"
                     BackgroundColor="{StaticResource PrimaryColor}"
                     Clicked="RegisterEvent"
                     HorizontalOptions="FillAndExpand" />
+
+                <Controls:ErrorSection x:Name="ErrorSection" ErrorMsgs=""/>
                 <Label
                     Margin="0,0,0,20"
                     Text="I have an account"

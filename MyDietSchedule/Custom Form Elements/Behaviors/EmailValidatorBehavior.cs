@@ -39,7 +39,8 @@ namespace MyDietSchedule.CustomFormElements.Behaviors
         void HandleTextUnfocused(object sender, FocusEventArgs e)
         {
             Entry entry = (Entry)sender;
-            IsValid = (Regex.IsMatch(entry.Text, Constants.emailRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(500))) || String.IsNullOrWhiteSpace(entry.Text);
+            string data = !string.IsNullOrWhiteSpace(entry.Text) ? entry.Text : "";
+            IsValid = Constants.CheckEmail(data);
             ((Entry)sender).TextColor = IsValid ? ColorDefault : Color.Red;
         }
 

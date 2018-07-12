@@ -8,16 +8,21 @@ namespace MyDietSchedule.Views.Users
 {
     public partial class NewUser : ContentPage
     {
+        User user;
         public NewUser()
         {
             InitializeComponent();
             Init();
             DesignInit();
+            InitUser();
         }
+
+        #region Initializers
 
         private void Init()
         {
             ActivitySpinner.IsVisible = false;
+            Entry_ConfirmPassword.Completed += (sender, e) => Btn_Register.Focus();
         }
 
         private void DesignInit()
@@ -25,6 +30,14 @@ namespace MyDietSchedule.Views.Users
             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Constants.GetColor("PrimaryColor");
             ((NavigationPage)Application.Current.MainPage).BarTextColor = Constants.GetColor("BarTextColor");
         }
+
+        void InitUser()
+        {
+            user = new User();
+            this.BindingContext = user;
+            Entry_ConfirmPassword.Text = "";
+        }
+        #endregion Initializers
 
         #region Event Methods
         void LoginViewEvent(object sender, System.EventArgs e)
@@ -34,55 +47,41 @@ namespace MyDietSchedule.Views.Users
             ActivitySpinner.IsVisible = false;
         }
 
-        async void RegisterEvent(object sender, System.EventArgs e)
+        public void RegisterEvent(object sender, System.EventArgs e)
         {
-            if (CheckEmptyValues())
-            {
-                await DisplayAlert("Error", "There are empty files, please fill all in", "Ok");
-                return;
-            }
-            if (MinPasswordLength())
-            {
-                await DisplayAlert("Error", "Password nneds to be equal or greater that 6 characters.", "Ok");
-                return;
-            }
-            if (!ConfirmPassword())
-            {
-                await DisplayAlert("Error", "Password doesn't match, try again", "Ok");
-                return;
-            }
-            User newUser = new User(Entry_Email.Text, Entry_Password.Text, Entry_FirstName.Text, Entry_LastName.Text, Entry_Phone.Text, BirthDatePicker.Date, Editor_Address.Text);
+            ActivitySpinner.IsVisible = true;
+            string[] validations = user.ValidateEmptyFields();
 
-            // Save User info
+            if (validations.Length == 0 && CheckBehaviors())
+            {
+                try
+                {
+                    App.UserDataBase.Save(user);
+                    InitUser();
+                    //ActivitySpinner.IsVisible = true;
+                    //Navigation.PushAsync(new NewMeasures());
+                    //ActivitySpinner.IsVisible = false;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                ErrorSection.ErrorMsgs = null;
+            }
+            else
+            {
+                ErrorSection.ErrorMsgs = validations;
+            }
+
+            ActivitySpinner.IsVisible = false;
         }
-        #endregion
+        #endregion Event Methods
 
         #region Private Methods
-        private bool MinPasswordLength()
+        bool CheckBehaviors()
         {
-            return Entry_Password.Text.Length < Constants.MinPasswordLength;
+            return emailValidator.IsValid && passValidator.IsValid && confirmPassValidator.IsValid;
         }
-
-        private bool ConfirmPassword()
-        {
-            return Entry_Password.Text.Equals(Entry_ConfirmPassword.Text);
-        }
-
-        private bool CheckEmptyValues()
-        {
-            return IsEmpty(Entry_FirstName.Text) ||
-                IsEmpty(Entry_LastName.Text) ||
-                IsEmpty(Editor_Address.Text) ||
-                IsEmpty(Entry_Phone.Text) ||
-                IsEmpty(Entry_Email.Text) ||
-                IsEmpty(Entry_Password.Text) ||
-                IsEmpty(Entry_ConfirmPassword.Text);
-        }
-
-        private bool IsEmpty(string value)
-        {
-            return String.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
-        }
-        #endregion
+        #endregion Private Methods
     }
 }

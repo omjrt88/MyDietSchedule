@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
+using MyDietSchedule.Utils;
 using SQLite;
 
 namespace MyDietSchedule.Models
@@ -33,6 +35,7 @@ namespace MyDietSchedule.Models
         public User()
         {
             this.Logged = false;
+            this.Birthday = DateTime.Now.AddYears(-20);
         }
 
         public User(string Email, string Password)
@@ -55,23 +58,46 @@ namespace MyDietSchedule.Models
         }
         #endregion
 
+        /*Validations*/
+        #region
+        public string[] ValidateEmptyFields()
+        {
+            List<string> list = new List<string>();
+
+            if (HasEmptyLoginParameters())
+            {
+                list.Add("There not has to be an Empty fields.");
+            }
+
+            return list.ToArray();
+        }
+
+        public string[] ValidateLogin()
+        {
+            List<string> list = new List<string>();
+
+            if (HasEmptyLoginParameters())
+            {
+                list.Add("Username or password is empty.");
+            }
+
+            return list.ToArray();
+        }
+        #endregion
+
         /***** Methods *****/
         #region Methods
 
-        public bool HasEmptyLoginParameters()
+        private bool HasEmptyLoginParameters()
         {
-            if (!String.IsNullOrWhiteSpace(this.Email) && !String.IsNullOrWhiteSpace(this.Password))
+            if (string.IsNullOrWhiteSpace(this.Email) || string.IsNullOrWhiteSpace(this.Password))
             {
                 return true;
             }
             return false;
         }
 
-        #endregion
-
-        /*Validations*/
-        #region
-        public bool HasEmptyFields()
+        private bool HasEmptyFields()
         {
             Type type = GetType();
             PropertyInfo[] propertyInfo = type.GetProperties();
@@ -87,8 +113,6 @@ namespace MyDietSchedule.Models
             return hasEmptyValues;
         }
 
-
         #endregion
-
     }
 }

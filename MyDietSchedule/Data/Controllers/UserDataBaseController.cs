@@ -14,7 +14,14 @@ namespace MyDietSchedule.Data.Controllers
         public UserDataBaseController()
         {
             database = DependencyService.Get<ISQLite>().GetConnection();
+            //database.CreateTable<User>();es            
+            if (database.Table<User>() != null)
+            {
+                database.DropTable<User>();
+            }
+
             database.CreateTable<User>();
+                
         }
 
         public User Get()
@@ -28,6 +35,21 @@ namespace MyDietSchedule.Data.Controllers
                 else
                 {
                     return database.Table<User>().First();
+                }
+            }
+        }
+
+        public User Get(int id)
+        {
+            lock (locker)
+            {
+                if (database.Table<User>().Count() == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return database.Get<User>(id);
                 }
             }
         }
@@ -53,6 +75,28 @@ namespace MyDietSchedule.Data.Controllers
             lock (locker)
             {
                 return database.Delete<User>(id);
+            }
+        }
+
+        public User LogIn(User user)
+        {
+            lock (locker)
+            {
+                User userFound = database.Table<User>().Where(u => u.Email == user.Email && u.Password == user.Password).First();
+                userFound.Logged = userFound.Id != 0;
+                database.Update(userFound);
+                return userFound;
+            }
+        }
+
+        public User LogOut(User user)
+        {
+            lock (locker)
+            {
+                User userFound = database.Table<User>().Where(u => u.Email == user.Email && u.Password == user.Password).First();
+                userFound.Logged = false;
+                database.Update(userFound);
+                return userFound;
             }
         }
     }

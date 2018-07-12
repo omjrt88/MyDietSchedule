@@ -24,5 +24,19 @@
             </Style>
         </Custom:BooleanToObjectConverter.TrueObject>
     </Custom:BooleanToObjectConverter>
+
+    <Custom:BooleanToObjectConverter x:Key="boolToStylePassWord" x:TypeArguments="Style">
+        <Custom:BooleanToObjectConverter.FalseObject>
+            <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
+                <Setter Property="TextColor" Value="#F44336" />
+            </Style>
+        </Custom:BooleanToObjectConverter.FalseObject>
+        <Custom:BooleanToObjectConverter.TrueObject>
+            <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
+                <Setter Property="TextColor" Value="#4CAF50" />
+                <Setter Property="Text" Value="" />
+            </Style>
+        </Custom:BooleanToObjectConverter.TrueObject>
+    </Custom:BooleanToObjectConverter>
     
 </ResourceDictionary>

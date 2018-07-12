@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Threading.Tasks;
 using MyDietSchedule.CustomFormElements;
+using MyDietSchedule.Data.Controllers;
 using MyDietSchedule.Models;
 using MyDietSchedule.Utils;
 using MyDietSchedule.Views.Users;
@@ -19,12 +22,13 @@ namespace MyDietSchedule.Views
         #region Initializers
         void Init()
         {
+            App.UserDataBase.Get();
             DesignInit();
             InitCircleImage();
             ActivitySpinner.IsVisible = false;
 
             Entry_Username.Completed += (sender, e) => Entry_Password.Focus();
-            Entry_Password.Completed += SignInProcedure;
+            Entry_Password.Completed += SignInProcedureAsync;
         }
 
         private void DesignInit()
@@ -42,37 +46,58 @@ namespace MyDietSchedule.Views
                 Aspect = Aspect.AspectFit,
                 HorizontalOptions = LayoutOptions.Center,
                 Source = "LoginIcon.png",
-                FillColor = Constants.GetColor("ImgbackgroudColor"),
+                //FillColor = Constants.GetColor("ImgbackgroudColor"),
                 Margin = new Thickness(0, 40, 0, 0)
             };
 
             ImgCircleStack.Children.Add(img);
         }
-
-        #endregion
+        #endregion Initializers
 
         #region Event Methods
-        void SignInProcedure(object sender, EventArgs e)
+        void SignInProcedureAsync(object sender, EventArgs e)
         {
             ActivitySpinner.IsVisible = true;
 
             User user = new User(Entry_Username.Text, Entry_Password.Text);
-            user.HasEmptyFields();
-
-            if (!string.IsNullOrWhiteSpace(Entry_Password.Text))
-            //if (user.Logged || Entry_Password.Text != "")
+            string[] validations = user.ValidateLogin();
+            if (validations.Length == 0 && CheckBehaviors())
             {
-                //await DisplayAlert("Login", "Si Entro esta vez", "Ok");
                 ErrorSection.ErrorMsgs = null;
+                LoginMethod(ref user);
                 ActivitySpinner.IsVisible = false;
-                //await Navigation.PushModalAsync(new NavigationPage(new MasterDetail()));
+                if (user.Id != 0)
+                {
+                    //await Navigation.PushModalAsync(new NavigationPage(new MasterDetail()));
+                    Console.WriteLine("logged");
+                }
+                ActivitySpinner.IsVisible = false;
             }
             else
             {
-                //await DisplayAlert("Login", "Error, Error, Error, Error, Error....", "Ok");
-                //await DisplayAlert("Login", "Login Not Correct, empty username or password", "Ok");
-                ErrorSection.ErrorMsgs = new string[]{"123", "456", "789"};
+                ErrorSection.ErrorMsgs = validations;
                 ActivitySpinner.IsVisible = false;
+            }
+        }
+        #endregion Methods
+
+
+        #region Private Methods
+        bool CheckBehaviors()
+        {
+            return emailValidator.IsValid;
+        }
+
+        protected void LoginMethod(ref User user)
+        {
+            try
+            {
+                user = App.UserDataBase.LogIn(user);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                ErrorSection.ErrorMsgs = new string[] { Constants.LoginError };
             }
         }
 
@@ -82,6 +107,6 @@ namespace MyDietSchedule.Views
             Navigation.PushAsync(new NewUser());
             ActivitySpinner.IsVisible = false;
         }
-        #endregion
+        #endregion Private Methods
     }
 }
