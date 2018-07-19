@@ -1,11 +1,236 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyDietSchedule.Views.Users.NewMeasures">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDietSchedule.Views.Users.NewMeasures"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:Controls="clr-namespace:MyDietSchedule.Controls"
+             xmlns:Custom="clr-namespace:MyDietSchedule.CustomFormElements"
+             xmlns:Behavior="clr-namespace:MyDietSchedule.CustomFormElements.Behaviors"
+             xmlns:theme="clr-namespace:MyDietSchedule.Utils.ResourceDictionaries"
+             Padding="0">
+
+    <ContentPage.Resources>
+        <ResourceDictionary MergedWith="theme:Form_Validations" />
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        
-        <ActivityIndicator 
-            x:Name="ActivitySpinner"
-            Color="{StaticResource PrimaryColor}"
-            IsRunning="true"/>
-        
+        <ScrollView>
+            <StackLayout Spacing="10"
+                         Margin="20,40,20,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Date:"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="0,10,0,0"
+                           TextColor="{StaticResource PrimaryColor}"/>
+
+                    <DatePicker 
+                        x:Name="DateAppointmentPicker"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="50" 
+
+                        FontSize="Medium"
+                        TextColor="{StaticResource SecondayColor}" 
+                        FontAttributes="Bold"
+                        Date="{Binding Date}">
+                        <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                        <DatePicker.MinimumDate>
+                            <sys:DateTime x:FactoryMethod="Parse">
+                                <x:Arguments>
+                                    <x:String>
+                                        Jan 1 1940
+                                    </x:String>
+                                </x:Arguments>
+                            </sys:DateTime>
+                        </DatePicker.MinimumDate>
+                        <DatePicker.MaximumDate>
+                            <sys:DateTime x:FactoryMethod="Parse">
+                                <x:Arguments>
+                                    <x:String>
+                                        Dec 31 2050
+                                    </x:String>
+                                </x:Arguments>
+                            </sys:DateTime>
+                        </DatePicker.MaximumDate>
+                    </DatePicker>
+                    
+                    <Label Text="Height:"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="0,20,0,0"
+                           TextColor="{StaticResource PrimaryColor}"/>
+                    <Custom:ImageEntry
+                        Grid.Row="1" Grid.Column="1"
+                        x:Name="Entry_Height"
+                        HeightRequest="50"
+                        TextColor="{StaticResource SecondayColor}"
+                        PlaceholderColor="{StaticResource PrimaryColor}"
+                        LineColor="{StaticResource PrimaryColor}"
+                        Placeholder="Height"
+                        Keyboard="Numeric"
+                        MaxLength="5"
+                        Text="{Binding Height}"
+                        HorizontalOptions="FillAndExpand"/>
+
+                    <Label Text="Weight:"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           Margin="0,20,0,0"
+                           TextColor="{StaticResource PrimaryColor}"/>
+                    <Custom:ImageEntry
+                        Grid.Row="2" Grid.Column="1"
+                        x:Name="Entry_Weight"
+                        HeightRequest="50"
+                        TextColor="{StaticResource SecondayColor}"
+                        PlaceholderColor="{StaticResource PrimaryColor}"
+                        LineColor="{StaticResource PrimaryColor}"
+                        Placeholder="Weight"
+                        Keyboard="Numeric"
+                        MaxLength="4"
+                        Text="{Binding Weight}"
+                        HorizontalOptions="FillAndExpand"/>
+
+                    <Label Text="Fat Percentage:"
+                           Grid.Row="3"
+                           Grid.Column="0"
+                           Margin="0,20,0,0"
+                           TextColor="{StaticResource PrimaryColor}"/>
+                    <Custom:ImageEntry
+                        Grid.Row="3" Grid.Column="1"
+                        x:Name="Entry_FatPercentage"
+                        HeightRequest="50"
+                        TextColor="{StaticResource SecondayColor}"
+                        PlaceholderColor="{StaticResource PrimaryColor}"
+                        LineColor="{StaticResource PrimaryColor}"
+                        Placeholder="Fat Percentage"
+                        Keyboard="Numeric"
+                        MaxLength="4"
+                        Text="{Binding FatPercentage}"
+                        HorizontalOptions="FillAndExpand"/>
+
+                    <Label Text="Muscle Percentage:"
+                           Grid.Row="4"
+                           Grid.Column="0"
+                           Margin="0,20,0,0"
+                           TextColor="{StaticResource PrimaryColor}"/>
+                    <Custom:ImageEntry
+                        Grid.Row="4" Grid.Column="1"
+                        x:Name="Entry_MusclePercentage"
+                        HeightRequest="50"
+                        TextColor="{StaticResource SecondayColor}"
+                        PlaceholderColor="{StaticResource PrimaryColor}"
+                        LineColor="{StaticResource PrimaryColor}"
+                        Placeholder="Muscle Percentage"
+                        Keyboard="Numeric"
+                        MaxLength="4"
+                        Text="{Binding MusclePercentage}"
+                        HorizontalOptions="FillAndExpand"/>
+
+                    <Label Text="Water Percentage:"
+                           Grid.Row="5"
+                           Grid.Column="0"
+                           Margin="0,20,0,0"
+                           TextColor="{StaticResource PrimaryColor}"/>
+                    <Custom:ImageEntry
+                        Grid.Row="5" Grid.Column="1"
+                        x:Name="Entry_WaterPercentage"
+                        HeightRequest="50"
+                        TextColor="{StaticResource SecondayColor}"
+                        PlaceholderColor="{StaticResource PrimaryColor}"
+                        LineColor="{StaticResource PrimaryColor}"
+                        Placeholder="Water Percentage"
+                        Keyboard="Numeric"
+                        MaxLength="4"
+                        Text="{Binding WaterPercentage}"
+                        HorizontalOptions="FillAndExpand"/>
+
+                    <Label Text="Viceral Fat Percentage:"
+                           Grid.Row="6"
+                           Grid.Column="0"
+                           Margin="0,20,0,0"
+                           TextColor="{StaticResource PrimaryColor}"/>
+                    <Custom:ImageEntry
+                        Grid.Row="6" Grid.Column="1"
+                        x:Name="Entry_ViceralFatPercentage"
+                        HeightRequest="50"
+                        TextColor="{StaticResource SecondayColor}"
+                        PlaceholderColor="{StaticResource PrimaryColor}"
+                        LineColor="{StaticResource PrimaryColor}"
+                        Placeholder="Viceral Fat Percentage"
+                        Keyboard="Numeric"
+                        MaxLength="4"
+                        Text="{Binding ViceralFatPercentage}"
+                        HorizontalOptions="FillAndExpand"/>
+                    
+                    <Label Text="Physical Activity:"
+                           Grid.Row="7"
+                           Grid.Column="0"
+                           Margin="0,20,0,0"
+                           TextColor="{StaticResource PrimaryColor}"/>
+                    <Custom:ImageEntry
+                        Grid.Row="7" Grid.Column="1"
+                        x:Name="Entry_PhysicalActivity"
+                        HeightRequest="50"
+                        TextColor="{StaticResource SecondayColor}"
+                        PlaceholderColor="{StaticResource PrimaryColor}"
+                        LineColor="{StaticResource PrimaryColor}"
+                        Placeholder="Physical Activity"
+                        Keyboard="Numeric"
+                        MaxLength="4"
+                        Text="{Binding PhysicalActivity}"
+                        HorizontalOptions="FillAndExpand"/>
+                </Grid>
+
+                <Label 
+                    Text="Notes:"
+                    FontSize="Medium"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    TextColor="{StaticResource PrimaryColor}" />
+
+                <StackLayout
+                    Padding="1,1,1,1"
+                    BackgroundColor="{StaticResource BorderColor}">
+                    <Editor
+                        BackgroundColor="{StaticResource ThirdBackgroundColor}" 
+                        x:Name="Editor_Notes"
+                        TextColor="{StaticResource SecondayColor}" 
+                        VerticalOptions="EndAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Text="{Binding Notes}"
+                        HeightRequest="100"/>
+                </StackLayout>
+
+
+                <ActivityIndicator
+                    x:Name="ActivitySpinner"
+                    Color="{StaticResource PrimaryColor}"
+                    IsRunning="true"/>
+
+                <Button
+                    x:Name="Btn_Add_Metrics"
+                    HeightRequest="50"
+                    TextColor="{StaticResource ThirdColor}"
+                    Text="Add Metrics"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    Clicked="AddMetrics"
+                    HorizontalOptions="FillAndExpand" />
+
+                <Controls:ErrorSection x:Name="ErrorSection" ErrorMsgs=""/>
+                
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

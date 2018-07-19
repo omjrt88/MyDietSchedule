@@ -13,7 +13,6 @@ namespace MyDietSchedule.Views.Users
         {
             InitializeComponent();
             Init();
-            DesignInit();
             InitUser();
         }
 
@@ -22,13 +21,9 @@ namespace MyDietSchedule.Views.Users
         private void Init()
         {
             ActivitySpinner.IsVisible = false;
+            NavigationPage.SetHasNavigationBar(this, false);
             Entry_ConfirmPassword.Completed += (sender, e) => Btn_Register.Focus();
-        }
 
-        private void DesignInit()
-        {
-            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Constants.GetColor("PrimaryColor");
-            ((NavigationPage)Application.Current.MainPage).BarTextColor = Constants.GetColor("BarTextColor");
         }
 
         void InitUser()
@@ -51,16 +46,13 @@ namespace MyDietSchedule.Views.Users
         {
             ActivitySpinner.IsVisible = true;
             string[] validations = user.ValidateEmptyFields();
-
             if (validations.Length == 0 && CheckBehaviors())
             {
                 try
                 {
                     App.UserDataBase.Save(user);
-                    InitUser();
-                    //ActivitySpinner.IsVisible = true;
-                    //Navigation.PushAsync(new NewMeasures());
-                    //ActivitySpinner.IsVisible = false;
+                    App.user = user;
+                    MessagingCenter.Send((object)this, "MeasuresPageCall");
                 }
                 catch (Exception ex)
                 {

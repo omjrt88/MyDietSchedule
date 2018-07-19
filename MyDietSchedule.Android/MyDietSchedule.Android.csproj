@@ -114,6 +114,8 @@
     <AndroidResource Include="Resources\drawable\user.png" />
     <AndroidResource Include="Resources\drawable\border.xml" />
     <AndroidResource Include="Resources\drawable\edit.png" />
+    <AndroidResource Include="Resources\drawable\ruler.png" />
+    <AndroidResource Include="Resources\drawable\newUser.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

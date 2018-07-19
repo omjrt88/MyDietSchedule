@@ -79,7 +79,7 @@ namespace MyDietSchedule.CustomFormElements.Behaviors
             }
             IsValid = string.IsNullOrWhiteSpace(ErrorMessage);
             EntryValue = password;
-            ((Entry)sender).TextColor = IsValid ? ColorDefault : Constants.GetColor("ErrorColor");
+            ((Entry)sender).TextColor = IsValid ? ColorDefault : GeneralMethods.GetColor("ErrorColor");
         }
 
         protected override void OnDetachingFrom(Entry bindable)

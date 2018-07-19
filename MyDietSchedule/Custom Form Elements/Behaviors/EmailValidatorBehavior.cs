@@ -40,7 +40,7 @@ namespace MyDietSchedule.CustomFormElements.Behaviors
         {
             Entry entry = (Entry)sender;
             string data = !string.IsNullOrWhiteSpace(entry.Text) ? entry.Text : "";
-            IsValid = Constants.CheckEmail(data);
+            IsValid = GeneralMethods.CheckEmail(data);
             ((Entry)sender).TextColor = IsValid ? ColorDefault : Color.Red;
         }
 

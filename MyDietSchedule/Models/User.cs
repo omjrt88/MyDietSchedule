@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Linq;
 using MyDietSchedule.Utils;
 using SQLite;
 
@@ -10,23 +10,14 @@ namespace MyDietSchedule.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
-
         public DateTime Birthday { get; set; }
-
         public string Address { get; set; }
-
         public string Email { get; set; }
-
         public string Phone { get; set; }
-
         public string Password { get; set; }
-
         public bool Logged { get; set; }
-
         public DateTime NextDate { get; set; }
 
         /***** Constructors *****/
@@ -64,9 +55,17 @@ namespace MyDietSchedule.Models
         {
             List<string> list = new List<string>();
 
-            if (HasEmptyLoginParameters())
+            if (GeneralMethods.HasEmptyFields(this, "String"))
             {
                 list.Add("There not has to be an Empty fields.");
+            }
+            if (Birthday >= DateTime.Now)
+            {
+                list.Add("Birthday has to be lower than current date.");
+            }
+            if (!string.IsNullOrWhiteSpace(Phone) && !Phone.All(c => char.IsDigit(c)))
+            {
+                list.Add("Phone Number has non numeric values.");
             }
 
             return list.ToArray();
@@ -96,23 +95,6 @@ namespace MyDietSchedule.Models
             }
             return false;
         }
-
-        private bool HasEmptyFields()
-        {
-            Type type = GetType();
-            PropertyInfo[] propertyInfo = type.GetProperties();
-            bool hasEmptyValues = false;
-            foreach (PropertyInfo pInfo in propertyInfo)
-            {
-                object value = type.GetProperty(pInfo.Name).GetValue(this);
-                if (pInfo.GetType().Name == "String")
-                {
-                    hasEmptyValues |= string.IsNullOrWhiteSpace((string)value);
-                }
-            }
-            return hasEmptyValues;
-        }
-
         #endregion
     }
 }

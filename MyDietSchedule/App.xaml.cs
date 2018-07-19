@@ -1,5 +1,6 @@
 using System;
 using MyDietSchedule.Data.Controllers;
+using MyDietSchedule.Models;
 using MyDietSchedule.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,6 +11,8 @@ namespace MyDietSchedule
     public partial class App : Application
     {
         static UserDataBaseController userDataBase;
+        static MeasurementDataBaseController measurementData;
+        public static User user;
 
         public App()
         {
@@ -42,6 +45,18 @@ namespace MyDietSchedule
                     userDataBase = new UserDataBaseController();
                 }
                 return userDataBase;
+            }
+        }
+
+        public static MeasurementDataBaseController MeasurementDataBase
+        {
+            get
+            {
+                if (measurementData == null)
+                {
+                    measurementData = new MeasurementDataBaseController();
+                }
+                return measurementData;
             }
         }
     }

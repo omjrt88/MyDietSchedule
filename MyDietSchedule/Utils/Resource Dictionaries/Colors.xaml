@@ -6,6 +6,7 @@
     <Color x:Key="PrimaryColor">#359B85</Color>
     <Color x:Key="SecondayColor">#364741</Color>
     <Color x:Key="ThirdColor">#ACCDBA</Color>
+    <Color x:Key="FourthColor">White</Color>
 
     
     <Color x:Key="BackgroundColor">#364741</Color>

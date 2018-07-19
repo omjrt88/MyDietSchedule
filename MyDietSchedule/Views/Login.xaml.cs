@@ -46,7 +46,7 @@ namespace MyDietSchedule.Views
                 Aspect = Aspect.AspectFit,
                 HorizontalOptions = LayoutOptions.Center,
                 Source = "LoginIcon.png",
-                //FillColor = Constants.GetColor("ImgbackgroudColor"),
+                //FillColor = GeneralMethods.GetColor("ImgbackgroudColor"),
                 Margin = new Thickness(0, 40, 0, 0)
             };
 
@@ -104,7 +104,8 @@ namespace MyDietSchedule.Views
         void RegisterView(object sender, EventArgs e)
         {
             ActivitySpinner.IsVisible = true;
-            Navigation.PushAsync(new NewUser());
+            //Navigation.PushAsync(new NewUser());
+            Navigation.PushAsync(new UserManagementView());
             ActivitySpinner.IsVisible = false;
         }
         #endregion Private Methods

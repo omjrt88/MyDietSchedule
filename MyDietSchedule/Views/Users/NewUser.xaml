@@ -8,8 +8,7 @@
     xmlns:Custom="clr-namespace:MyDietSchedule.CustomFormElements"
     xmlns:Behavior="clr-namespace:MyDietSchedule.CustomFormElements.Behaviors"
     xmlns:Controls="clr-namespace:MyDietSchedule.Controls"
-    xmlns:theme="clr-namespace:MyDietSchedule.Utils.ResourceDictionaries"
-    Title="Register User">
+    xmlns:theme="clr-namespace:MyDietSchedule.Utils.ResourceDictionaries">
     
     <ContentPage.Resources>
         <ResourceDictionary MergedWith="theme:Form_Validations" />
@@ -61,7 +60,6 @@
                         TextColor="{StaticResource SecondayColor}" 
                         FontAttributes="Bold"
                         Date="{Binding Birthday}">
-<!--                        Date="{x:Static sys:DateTime.Now}">-->
                         <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                         <DatePicker.MinimumDate>
                             <sys:DateTime x:FactoryMethod="Parse">
@@ -93,7 +91,7 @@
 
                 <StackLayout
                     Margin="20,0,20,0"
-                    Padding="0,0,0,2"
+                    Padding="1,1,1,1"
                     BackgroundColor="{StaticResource BorderColor}">
                     <Editor
                         BackgroundColor="{StaticResource ThirdBackgroundColor}" 
@@ -107,7 +105,7 @@
 
                 <Custom:ImageEntry
                     x:Name="Entry_Phone"
-                    Margin="20,40,20,0"
+                    Margin="20,20,20,0"
                     HeightRequest="50"
                     TextColor="{StaticResource SecondayColor}" 
                     PlaceholderColor="{StaticResource PrimaryColor}"
@@ -120,7 +118,7 @@
 
                 <Custom:ImageEntry
                     x:Name="Entry_Email"
-                    Margin="20,40,20,0"
+                    Margin="20,20,20,0"
                     HeightRequest="50"
                     TextColor="{StaticResource SecondayColor}" 
                     PlaceholderColor="{StaticResource PrimaryColor}"
@@ -224,7 +222,7 @@
                     Clicked="RegisterEvent"
                     HorizontalOptions="FillAndExpand" />
 
-                <Controls:ErrorSection x:Name="ErrorSection" ErrorMsgs=""/>
+                <Controls:ErrorSection Margin="20,0,20,0" x:Name="ErrorSection" ErrorMsgs=""/>
                 <Label
                     Margin="0,0,0,20"
                     Text="I have an account"

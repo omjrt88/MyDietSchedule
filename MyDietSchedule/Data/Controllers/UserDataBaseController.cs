@@ -13,8 +13,7 @@ namespace MyDietSchedule.Data.Controllers
 
         public UserDataBaseController()
         {
-            database = DependencyService.Get<ISQLite>().GetConnection();
-            //database.CreateTable<User>();es            
+            database = DependencyService.Get<ISQLite>().GetConnection();            
             if (database.Table<User>() != null)
             {
                 database.DropTable<User>();
