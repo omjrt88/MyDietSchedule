@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
+using static System.Activator;
 
 namespace MyDietSchedule.Utils
 {
@@ -22,7 +23,7 @@ namespace MyDietSchedule.Utils
         public static object GetInstance(string strNamesapace)
         {
             Type t = Type.GetType(strNamesapace);
-            return Activator.CreateInstance(t);
+            return CreateInstance(t);
         }
 
         public static bool HasEmptyFields<T>(T formModel, string validType, string exceptions = "")

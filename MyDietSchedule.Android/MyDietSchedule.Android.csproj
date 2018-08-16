@@ -82,6 +82,7 @@
     <Compile Include="Custom Form Elements\ImageCircleRenderer.cs" />
     <Compile Include="Custom Form Elements\ImageEntryRenderer.cs" />
     <Compile Include="Effects\DroidBackgroundEntryEffect.cs" />
+    <Compile Include="Data\JsonFileMethods_Android.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

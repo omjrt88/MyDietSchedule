@@ -29,12 +29,8 @@ namespace MyDietSchedule.Views.Users
         private NavigationPage SetDefaultValues(string title, ContentPage contentPage)
         {
             NavigationPage page = new NavigationPage(contentPage);
-            //page.BarBackgroundColor = GeneralMethods.GetColor("ThirdColor");
-            //page.BarTextColor = GeneralMethods.GetColor("FourthColor");
             page.Title = title;
             page.Icon = "ruler.png";
-            //page.HeightRequest = 30;
-            //page.WidthRequest = 30;
 
             return page;
         }

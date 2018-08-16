@@ -4,6 +4,7 @@ using MyDietSchedule.Models;
 using MyDietSchedule.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Newtonsoft;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MyDietSchedule
@@ -12,6 +13,8 @@ namespace MyDietSchedule
     {
         static UserDataBaseController userDataBase;
         static MeasurementDataBaseController measurementData;
+        static FoodTypeDataBaseController foodTypeData;
+        static FoodDataBaseController foodData;
         public static User user;
 
         public App()
@@ -19,6 +22,7 @@ namespace MyDietSchedule
             InitializeComponent();
 
             MainPage = new NavigationPage(new Login());
+
         }
 
         protected override void OnStart()
@@ -57,6 +61,30 @@ namespace MyDietSchedule
                     measurementData = new MeasurementDataBaseController();
                 }
                 return measurementData;
+            }
+        }
+
+        public static FoodTypeDataBaseController FoodTypeDataBase
+        {
+            get
+            {
+                if (foodTypeData == null)
+                {
+                    foodTypeData = new FoodTypeDataBaseController();
+                }
+                return foodTypeData;
+            }
+        }
+
+        public static FoodDataBaseController FoodDataBase
+        {
+            get
+            {
+                if (foodData == null)
+                {
+                    foodData = new FoodDataBaseController();
+                }
+                return foodData;
             }
         }
     }

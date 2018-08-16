@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Tasks;
 using MyDietSchedule.CustomFormElements;
-using MyDietSchedule.Data.Controllers;
 using MyDietSchedule.Models;
 using MyDietSchedule.Utils;
 using MyDietSchedule.Views.Users;
@@ -29,6 +25,9 @@ namespace MyDietSchedule.Views
 
             Entry_Username.Completed += (sender, e) => Entry_Password.Focus();
             Entry_Password.Completed += SignInProcedureAsync;
+
+            AutoCast autoCast = new AutoCast(Constants.InitialJson, App.FoodTypeDataBase, App.FoodDataBase);
+            autoCast.Convert2Object();
         }
 
         private void DesignInit()

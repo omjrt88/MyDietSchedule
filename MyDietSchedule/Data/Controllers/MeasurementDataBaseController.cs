@@ -23,7 +23,7 @@ namespace MyDietSchedule.Data.Controllers
             }
 
             database.CreateTable<Measurement>();
-                
+
         }
 
         public Measurement Get(int id)
@@ -88,7 +88,7 @@ namespace MyDietSchedule.Data.Controllers
             }
         }
 
-        public int Delete(User user, int id)
+        public int Delete(int id)
         {
             lock (locker)
             {

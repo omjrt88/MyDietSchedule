@@ -99,6 +99,7 @@
     <Compile Include="Custom Form Elements\ImageCircleRenderer.cs" />
     <Compile Include="Custom Form Elements\ImageEntryRenderer.cs" />
     <Compile Include="Effects\iOSBackgroundEntryEffect.cs" />
+    <Compile Include="Data\JsonFileMethods_IOS.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
